@@ -1,4 +1,4 @@
-import * as path from 'path'
+import * as Path from 'path'
 import * as FSE from 'fs-extra'
 import { GitProcess } from 'dugite'
 
@@ -27,7 +27,7 @@ describe('git/status', () => {
 
       beforeEach(async () => {
         repository = await setupConflictedRepo()
-        filePath = path.join(repository.path, 'foo')
+        filePath = Path.join(repository.path, 'foo')
       })
 
       it('parses conflicted files', async () => {
@@ -57,7 +57,7 @@ describe('git/status', () => {
 
       it('parses changed files', async () => {
         await FSE.writeFile(
-          path.join(repository!.path, 'README.md'),
+          Path.join(repository!.path, 'README.md'),
           'Hi world\n'
         )
 
@@ -79,7 +79,7 @@ describe('git/status', () => {
       it('reflects renames', async () => {
         const repo = await setupEmptyRepository()
 
-        await FSE.writeFile(path.join(repo.path, 'foo'), 'foo\n')
+        await FSE.writeFile(Path.join(repo.path, 'foo'), 'foo\n')
 
         await GitProcess.exec(['add', 'foo'], repo.path)
         await GitProcess.exec(['commit', '-m', 'Initial commit'], repo.path)
@@ -137,7 +137,7 @@ describe('git/status', () => {
           for (let i = 0; i < numFiles; i++) {
             promises.push(
               FSE.writeFile(
-                path.join(basePath, `test-file-${i}`),
+                Path.join(basePath, `test-file-${i}`),
                 'Hey there\n'
               )
             )
